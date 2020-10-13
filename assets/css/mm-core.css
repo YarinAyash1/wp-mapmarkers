@@ -1,0 +1,36 @@
+
+/*--------------------------- 
+Add Plugin Front-End CSS here 
+---------------------------*/
+
+/**
+ * Custom Mapbox CSS
+ */
+
+ #map {
+    width: 100%;
+    height: 400px;
+}
+
+.marker {
+    background-image: url(../img/marker-icon.png);
+    background-size: cover;
+    width: 41px;
+    height: 41px;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+    top: -41px;
+}
+
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Fix for the search input box padding on ACF4 */
+.acf_postbox .mapboxgl-ctrl-geocoder input[type='text'] {
+    padding: 10px 10px 10px 40px;
+}
