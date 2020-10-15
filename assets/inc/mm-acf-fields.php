@@ -140,19 +140,3 @@ endif;
 
 
 
-add_action('rest_api_init', function () {
-    register_rest_route('map_marker/v1', '/markers/', array(
-        'methods' => 'GET',
-        'callback' => 'markers_endpoint'
-    ));
-});
-
-
-function my_acf_init()
-{
-    acf_update_setting('google_api_key', 'AIzaSyCG9PXHx3IIs8l8RynCqe_eI9nB3PfAefU');
-}
-
-add_action('acf/init', 'my_acf_init');
-
-
