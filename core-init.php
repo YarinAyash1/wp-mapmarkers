@@ -100,7 +100,7 @@ if (! class_exists('MapMarkers')) {
         }
         
         public function register_scripts_styles(){
-            wp_enqueue_style('mm-core', $this->settings['css'] . 'mm-core.css', null, time('s'), 'all');
+            wp_enqueue_style('mm-core', $this->settings['css'] . 'mm-core.css', null, time(), 'all');
             wp_enqueue_script('mm-core', $this->settings['js'] . 'mm-core.js', 'jquery', time(), true);
             wp_localize_script('mm-core', 'ajax_object', array( 'ajaxurl' => admin_url('admin-ajax.php') ));
         }
