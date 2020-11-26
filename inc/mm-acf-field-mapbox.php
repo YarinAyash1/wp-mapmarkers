@@ -10,7 +10,7 @@ if ( ! class_exists( 'MapboxField' ) ) {
 		 *  This function will setup the field type data
 		 *
 		 * @type    function
-		 * @since   1.0.0
+		 * @since   1.0.1
 		 *
 		 * @param $settings
 		 */
@@ -76,7 +76,7 @@ if ( ! class_exists( 'MapboxField' ) ) {
 		 *  Create extra settings for your field. These are visible when editing a field
 		 *
 		 * @type    action
-		 * @since    1.0.0
+		 * @since    1.0.1
 		 *
 		 * @param    $field (array) the $field being edited
 		 *
@@ -193,7 +193,7 @@ if ( ! class_exists( 'MapboxField' ) ) {
 		 * @param    $field (array) the $field being rendered
 		 *
 		 * @type    action
-		 * @since    1.0.0
+		 * @since    1.0.1
 		 *
 		 * @param    $field (array) the $field being edited
 		 *
@@ -202,7 +202,7 @@ if ( ! class_exists( 'MapboxField' ) ) {
 		function render_field( $field ) {
 			// Apply filter from functions.php to use the Mapbox access token
 			$api = apply_filters( 'acf/fields/mapbox/api', array() );
-
+			
 			// Get the field ID because this will serve as the wrapper element of the map and the hidden fields
 			$field_id = $field['id'];
 
@@ -284,7 +284,7 @@ if ( ! class_exists( 'MapboxField' ) ) {
 		 *  Use this action to add CSS + JavaScript to assist your render_field() action.
 		 *
 		 * @type    action (admin_enqueue_scripts)
-		 * @since    1.0.0
+		 * @since    1.0.1
 		 *
 		 * @param    n/a
 		 *

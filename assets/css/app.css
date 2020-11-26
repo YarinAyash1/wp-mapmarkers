@@ -1,0 +1,126 @@
+
+/*--------------------------- 
+Add Plugin Front-End CSS here 
+---------------------------*/
+
+/**
+ * Custom Mapbox CSS
+ */
+ @import url('https://fonts.googleapis.com/css?family=Heebo:400,500&display=swap');
+
+ #map {
+    width: 100%;
+    height: 400px;
+}
+.map-marker{
+    display: grid;
+    grid-template-columns: 0.25fr 1fr;
+    width: 100%;
+    direction: rtl;
+    font-family: Heebo;
+}
+.mapboxgl-canvas{
+  width: 100%;
+}
+.side-map{
+    margin-left: 10px;
+    max-height: 495px;
+    padding: 3px 5px;
+    overflow-y: scroll;
+    position: relative;
+}
+.marker {
+    background-image: url(../img/marker-icon.png);
+    background-size: cover;
+    width: 41px;
+    height: 41px;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+    top: -41px;
+}
+
+.mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Fix for the search input box padding on ACF4 */
+.acf_postbox .mapboxgl-ctrl-geocoder input[type='text'] {
+    padding: 10px 10px 10px 40px;
+}
+
+.marker {
+    border-radius: 50%; 
+        background-size: cover; 
+      border: 8px solid #000;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+
+  }
+  .mapboxgl-popup-content{
+      border-radius: 5px;
+      background-color: #ffffff !important;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+      padding: 10px;
+      text-align: center;
+  }
+  .marker .marker-name{
+    width: 100px;
+    height: 10px;
+  }
+  .marker::after {
+      position: absolute;
+      content: '';
+      width: 0px;
+      height: 0px;
+      bottom: -37px;
+      left: -1px;
+      border: 16px solid transparent;
+      border-top: 21px solid #000;
+  }
+  .map { 
+      height: 500px;
+      border-radius: 7px;
+  }
+
+  .badge {
+    box-shadow: 0px 0px 0px 2px #B3E4F5;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+.badge h2{
+    width:100%;
+    margin:0;
+}
+.badge-meta{
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.types {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 5px;
+    text-align: right;
+}
+.types .type {
+    font-size: 12px;
+}
+.types .type:not(:first-child):before {
+    content:"•";
+}
+
+.badge-image img {
+    box-shadow: 0px 0px 0px 1px #748388;
+    border-radius: 50%;
+    width: 100%;
+    max-width: 70px;
+}

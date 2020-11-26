@@ -18,7 +18,7 @@ if (! class_exists('MapMarkers')) {
          *  This function will setup the class functionality
          *
          * @type    function
-         * @since    1.0.0
+         * @since    1.0.1
          *
          * @param    void
          *
@@ -29,10 +29,10 @@ if (! class_exists('MapMarkers')) {
             // settings
             // - these will be passed into the field class.
             $this->settings = array(
-                'version' => '1.0.0',
+                'version' => '1.0.1',
                 'url'     => plugin_dir_url(__FILE__),
                 'path'    => plugin_dir_path(__FILE__),
-                'inc'     => dirname(__FILE__).'/assets/inc/',
+                'inc'     => dirname(__FILE__).'/inc/',
                 'imgs'    => plugins_url('assets/img/', __FILE__),
                 'css'     => plugins_url('assets/css/', __FILE__),
                 'js'      => plugins_url('assets/js/', __FILE__),
@@ -45,9 +45,35 @@ if (! class_exists('MapMarkers')) {
             add_action('plugin_loaded', array( $this, 'load_functions' ));
             add_action('wp_enqueue_scripts', array( $this, 'register_scripts_styles' ));
             add_action('template_include', array( $this, 'include_app' ));
+            add_shortcode('mapmarkers', array( $this, 'app_init'));
+        }
+
+
+        public function vue_template_components(){
+
+            include( $this->settings['inc'] . 'vue-components/map.template.php');
+            include( $this->settings['inc'] . 'vue-components/badge.template.php');
 
         }
 
+        public function app_init(){
+            wp_enqueue_style('mm-app');
+            wp_enqueue_style('mm-mapbox-css');
+            wp_enqueue_script('mm-vue');
+            wp_enqueue_script('mm-main');
+            wp_enqueue_script('mm-mapbox');
+            wp_enqueue_script('mm-mapbox-lang');
+            add_action('wp_footer', array( $this, 'vue_template_components' ));
+       
+            ob_start();
+            include( $this->settings['inc'] . 'vue-components/app.php');
+
+            $output = ob_get_contents();
+            ob_end_clean();
+            return $output;
+        }
+
+        
         /**
          *  include_field
          *
@@ -57,7 +83,7 @@ if (! class_exists('MapMarkers')) {
          *
          * @param int $version
          *
-         * @since    1.0.0
+         * @since    1.0.1
          *
          * @return    void
          */
@@ -76,6 +102,7 @@ if (! class_exists('MapMarkers')) {
             require_once($this->settings['inc'] . 'mm-core-functions.php');
             require_once($this->settings['inc'] . 'mm-cpt.php');
             require_once($this->settings['inc'] . 'mm-acf-fields.php');
+            require_once($this->settings['inc'] . 'mm-admin.php');
             
         }
 
@@ -85,14 +112,17 @@ if (! class_exists('MapMarkers')) {
     
             if(is_post_type_archive('markers')) {
             // some additional logic goes here^.
-    
-                    return $this->settings['app'] . 'index.html';
+                if(file_exists(get_template_directory_uri() . '/archive-markers.php')) {
+                    return get_template_directory_uri() . '/archive-markers.php';
+                } else {
+                    return $this->settings['inc'] . 'templates/archive-markers.php';
+                }
             }
             else if(is_singular('markers')) {
                 if(file_exists(get_template_directory_uri() . '/single-marker.php')) {
                     return get_template_directory_uri() . '/single-marker.php';
                 } else {
-                    return $this->settings['app'] . 'single-marker.php';
+                    return $this->settings['inc'] . 'templates/single-marker.php';
                 }
             }
             
@@ -100,7 +130,13 @@ if (! class_exists('MapMarkers')) {
         }
         
         public function register_scripts_styles(){
-            wp_enqueue_style('mm-core', $this->settings['css'] . 'mm-core.css', null, time(), 'all');
+            wp_register_script('mm-vue', $this->settings['js'] . 'vue.min.js', null, null, true);
+            wp_register_script('mm-main', $this->settings['js'] . 'main.js', 'mm-vue', null, true);
+            wp_register_script('mm-mapbox', 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js', 'mm-vue', null, true);
+            wp_register_script('mm-mapbox-lang', 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js', 'mm-vue', null, true);
+            wp_register_style('mm-mapbox-css','https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css', null, null, 'all');
+            wp_register_style('mm-app', $this->settings['css'] . 'app.css', null, time(), 'all');
+
             wp_enqueue_script('mm-core', $this->settings['js'] . 'mm-core.js', 'jquery', time(), true);
             wp_localize_script('mm-core', 'ajax_object', array( 'ajaxurl' => admin_url('admin-ajax.php') ));
         }
