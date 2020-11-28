@@ -6,8 +6,6 @@ if (! defined('WPINC')) {
 } // end if
 
 ?>
-<template id='map-component'>
-    <div>
-        <div id='mapmarker' class='map'> </div>
-    </div>
+<template id="map-component">
+    <div id="mapmarker" class="map"></div>
 </template>

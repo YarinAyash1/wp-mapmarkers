@@ -36,6 +36,7 @@ if (! class_exists('MapMarkers')) {
                 'imgs'    => plugins_url('assets/img/', __FILE__),
                 'css'     => plugins_url('assets/css/', __FILE__),
                 'js'      => plugins_url('assets/js/', __FILE__),
+
             );
 
             // include field depending on ACF version
@@ -129,8 +130,8 @@ if (! class_exists('MapMarkers')) {
         }
         
         public function register_scripts_styles(){
-            wp_register_script('mm-vue', $this->settings['js'] . 'vue.min.js', null, null, true);
-            wp_register_script('mm-main', $this->settings['js'] . 'main.js', 'mm-vue', null, true);
+            wp_register_script('mm-vue', 'https://unpkg.com/vue@next', null, null, true);
+            wp_register_script('mm-main', $this->settings['js'] . 'main-vue3.js', 'mm-vue', null, true);
             wp_register_script('mm-mapbox', 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js', 'mm-vue', null, true);
             wp_register_script('mm-mapbox-lang', 'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.1/mapbox-gl-language.js', 'mm-vue', null, true);
             wp_register_style('mm-mapbox-css','https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css', null, null, 'all');

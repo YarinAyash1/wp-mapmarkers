@@ -34,9 +34,9 @@
             * Parent and child items. A non-hierarchical CPT
             * is like Posts.
             */ 
-            'query_var' => true,
+            'query_var' => false,
             'hierarchical'        => false,
-            'public'              => true,
+            'public'              => false,
             'show_ui'             => true,
             'show_in_menu'        => true,
             'show_in_nav_menus'   => true,
@@ -82,7 +82,7 @@ function mm_taxonomy() {
 	$args = array(
 		'labels'                     => $labels,
 		'hierarchical'               => true,
-		'public'                     => true,
+		'public'                     => false,
 		'show_ui'                    => true,
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
