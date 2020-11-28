@@ -59,7 +59,7 @@ class Markers_API extends WP_REST_Controller
     
         foreach ($posts as $key => $post) {
             $posts[$key] = get_fields($post->ID);
-            $posts[$key]['marker_id'] = sanitize_title(get_the_title($post->ID));
+            $posts[$key]['marker_id'] = $post->ID;
             $posts[$key]['marker_types'] = wp_get_post_terms($post->ID, $taxonomies, array("fields" => "all"));
         }
     
