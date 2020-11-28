@@ -36,7 +36,6 @@ if (! class_exists('MapMarkers')) {
                 'imgs'    => plugins_url('assets/img/', __FILE__),
                 'css'     => plugins_url('assets/css/', __FILE__),
                 'js'      => plugins_url('assets/js/', __FILE__),
-                'app'     => dirname(__FILE__).'/app/map-markers/dist/',
             );
 
             // include field depending on ACF version
